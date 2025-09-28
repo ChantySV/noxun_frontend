@@ -3,4 +3,5 @@ export interface JSONPlaceholderResponse {
     id:     number;
     title:  string;
     body:   string;
+    userName: string
 }
