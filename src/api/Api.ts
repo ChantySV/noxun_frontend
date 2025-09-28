@@ -41,9 +41,9 @@ export const getCommentsByPost = async (id: number): Promise<CommentInterface[]>
     return response.data;
 }
 
-export const getPostsWithUserNames = async () => {
+export const getPostsWithUserNames = async (page: number = 0) => {
     const [postsResponse, usersResponse] = await Promise.all([
-        API<JSONPlaceholderResponse[]>('/posts', { params: { _limit: 10, _start: 0 } }),
+        API<JSONPlaceholderResponse[]>('/posts', { params: { _limit: 10, _start: page * 10 } }),
         API<UsersInterface[]>('/users')
     ]);
 
@@ -56,6 +56,5 @@ export const getPostsWithUserNames = async () => {
         ...post,
         userName: userMap.get(post.userId) || 'Desconocido'
     }));
-    console.log(postsWithUserNames);
     return postsWithUserNames;
 }
