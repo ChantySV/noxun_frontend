@@ -1,21 +1,27 @@
+import { useState, useEffect } from "react";
+import { getPostsWithUserNames } from "../api/Api";
+import { JSONPlaceholderResponse } from "../api/post/post.interface";
 import { CustomHeader } from "../common/components/CustomHeader";
-import { SearchBar } from "../common/components/SearchBar";
-import { Table } from "../components/Table";
+import { Table } from "../components/table/Table";
 
 export const Home = () => {
+  const [posts, setPosts] = useState<JSONPlaceholderResponse[]>([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await getPostsWithUserNames();
+      setPosts(response);
+    };
+    fetchPosts();
+  }, []);
+
   return (
     <>
-      {/* Header */}
       <CustomHeader
         title="JSONPlaceholder"
         description="Una simple y falsa REST API para testing y prototipado."
       />
-
-      {/* Search Bar */}
-      <SearchBar placeholder="Buscar por titulo o contenido " />
-
-      {/* Table */}
-      <Table />
+      <Table posts={posts} />
     </>
   );
 };
