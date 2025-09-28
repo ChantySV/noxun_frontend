@@ -2,9 +2,15 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { PostDetailPage } from "./pages/PostDetailPage";
 import { PostCommentsPage } from "./pages/PostCommentPage";
+import { CustomHeader } from "./common/components/CustomHeader";
 
 export const App = () => {
   return (
+    <>
+    <CustomHeader
+            title="JSONPlaceholder"
+            description="Una simple y falsa REST API para testing y prototipado."
+          />
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/main-page" />} />
@@ -19,5 +25,6 @@ export const App = () => {
         />
       </Routes>
     </BrowserRouter>
+    </>
   );
 };

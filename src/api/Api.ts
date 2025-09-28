@@ -22,10 +22,17 @@ export const getPost = async () => {
     return response.data
 }
 
-export const getPostById = async (id: number): Promise<JSONPlaceholderResponse> => {
-    const response = await API<JSONPlaceholderResponse>(`/posts/${id}`);
-    // console.log(response.data);
-    return response.data
+export const getPostById = async (id: number): Promise<JSONPlaceholderResponse & { userName?: string }> => {
+    const [postResponse, usersResponse] = await Promise.all([
+        API<JSONPlaceholderResponse>(`/posts/${id}`),
+        API<UsersInterface[]>('/users')
+    ]);
+
+    const user = usersResponse.data.find(u => u.id === postResponse.data.userId);
+    return {
+        ...postResponse.data,
+        userName: user ? user.name : 'Desconocido'
+    };
 };
 
 export const getCommentsByPost = async (id: number): Promise<CommentInterface[]> => {
@@ -41,9 +48,9 @@ export const getCommentsByPost = async (id: number): Promise<CommentInterface[]>
     return response.data;
 }
 
-export const getPostsWithUserNames = async (page: number = 0) => {
+export const getPostsWithUserNames = async () => {
     const [postsResponse, usersResponse] = await Promise.all([
-        API<JSONPlaceholderResponse[]>('/posts', { params: { _limit: 10, _start: page * 10 } }),
+        API<JSONPlaceholderResponse[]>('/posts'),
         API<UsersInterface[]>('/users')
     ]);
 
