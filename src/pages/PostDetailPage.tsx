@@ -20,17 +20,21 @@ export const PostDetailPage = () => {
   }, [id]);
 
   return (
-    <div>
+    <div className="max-w-6xl mx-auto p-gray-100 min-h-screen">
       <Table />
+
       {post && (
-        <div style={{ marginTop: "2rem", padding: "1rem", border: "1px solid #ccc" }}>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <h3>Detalles del Post</h3>
+        <div className="mt-8 p-6 bg-white border border-gray-200 rounded-xl shadow-lg">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-xl font-semibold text-gray-800">Detalles del Post</h3>
             <CloseButton />
           </div>
-          <p>Título: {post.title}</p>
-          <p>Contenido: {post.body}</p>
-          <p>Nomber de Usuario: {post.userName}</p>
+
+          <div className="space-y-3 text-gray-700">
+            <p><span className="font-semibold">Título:</span> {post.title}</p>
+            <p><span className="font-semibold">Contenido:</span> {post.body}</p>
+            <p><span className="font-semibold">Nombre de Usuario:</span> {post.userName}</p>
+          </div>
         </div>
       )}
     </div>

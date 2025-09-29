@@ -3,11 +3,11 @@ interface Props {
   description?: string;
 }
 
-export const CustomHeader = ({ title = 'JSONPlanceholder', description }: Props) => {
+export const CustomHeader = ({ title = 'JSONPlaceholder', description }: Props) => {
   return (
-    <>
-      <h1 className="content-center">{ title }</h1>
-      <h3 className="content-center"> { description } </h3>
-    </>
+    <div className="text-center mb-6">
+      <h1 className="text-3xl font-bold text-gray-800">{title}</h1>
+      {description && <h3 className="text-lg text-gray-600 mt-2">{description}</h3>}
+    </div>
   );
 };

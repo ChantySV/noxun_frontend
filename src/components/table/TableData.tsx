@@ -3,16 +3,25 @@ import { JSONPlaceholderResponse } from "../../api/post/post.interface";
 
 export const TableData = (props: JSONPlaceholderResponse) => {
   return (
-    <tr>
-      <td>{props.title}</td>
-      <td>{props.userName}</td>
-      <td>
+    <tr className="hover:bg-gray-100 transition-colors">
+      <td className="py-2 px-4">{props.title}</td>
+      <td className="py-2 px-4">{props.userName}</td>
+      <td className="py-2 px-4 space-x-2">
         <Link to={`/main-page/detail/${props.id}`}>
-          <button>Ver Detalles</button>
+          <button
+            type="button"
+            className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition-colors"
+          >
+            Ver Detalles
+          </button>
         </Link>
-        <br />
         <Link to={`/main-page/comments/${props.id}`}>
-          <button>Ver Comentarios</button>
+          <button
+            type="button"
+            className="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600 transition-colors"
+          >
+            Ver Comentarios
+          </button>
         </Link>
       </td>
     </tr>
