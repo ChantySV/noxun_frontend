@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import { JSONPlaceholderResponse } from "../../api/post/post.interface";
 
-export const TableData = (props: JSONPlaceholderResponse) => {
+interface TableDataProps extends JSONPlaceholderResponse {
+  className?: string;
+}
+
+
+export const TableData = (props: TableDataProps) => {
   return (
     <tr className="hover:bg-gray-100 transition-colors">
       <td className="py-2 px-4">{props.title}</td>
